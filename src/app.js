@@ -17,7 +17,7 @@ const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
 const fakerRouter = require("./routes/faker.router.js");
 
-const manejadorError = require("./middleware/error.js");
+//const manejadorError = require("./middleware/error.js");
 
 
 const app = express();
@@ -70,7 +70,7 @@ app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/api", fakerRouter);
 app.use("/", viewsRouter);
-app.use(manejadorError);
+//app.use(manejadorError);
 
 //RUTA PARA TESTEAR WINSTON: 
 app.get("/loggertest", (req, res) => {

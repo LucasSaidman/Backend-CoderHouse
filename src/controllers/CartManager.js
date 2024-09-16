@@ -7,7 +7,6 @@ const productRepository = new ProductRepository();
 const { generateUniqueCode, calcularTotal } = require("../utils/cartutils.js");
 const EmailManager = require("../services/email.js");
 const emailManager = new EmailManager();
-const addLogger = require("../utils/logger.js");
 
 class CartManager {
 

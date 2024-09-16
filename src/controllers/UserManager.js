@@ -7,6 +7,9 @@ const { generarResetToken } = require("../utils/tokenreset.js");
 const EmailManager = require("../services/email.js");
 const emailManager = new EmailManager();
 
+const UserRepository = require("../repositories/user.repository.js");
+const userRepository = new UserRepository();
+
 class UserManager {
   async register(req, res) {
 
@@ -32,14 +35,10 @@ class UserManager {
         age
       });
 
-      await nuevoUsuario.save();
+      await userRepository.create(nuevoUsuario);
 
       const token = jwt.sign({
-        first_name : nuevoUsuario.first_name,
-        last_name : nuevoUsuario.last_name,
-        email : nuevoUsuario.email,
-        age : nuevoUsuario.age,
-        role : nuevoUsuario.role,
+        user: nuevoUsuario
        }, "coderhouse", {
         expiresIn: "24h"
       });
@@ -49,7 +48,7 @@ class UserManager {
         httpOnly: true
       });
 
-      res.redirect("/api/users/profile");
+      res.redirect("/login");
 
     } catch (error) {
 

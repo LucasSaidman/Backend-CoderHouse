@@ -1,5 +1,4 @@
 const ProductModel = require("../models/products.model.js");
-const EErrors = require("../services/errors/enum.js");
 
 
 class ProductRepository {
@@ -82,7 +81,8 @@ class ProductRepository {
                 nextLink: hasNextPage ? `/api/products?limit=${limit}&page=${page + 1}&sort=${sort}&query=${query}` : null,
             };
         } catch (error) {
-            throw new Error(EErrors.ERROR_GENERAL);
+            //throw new Error(EErrors.ERROR_GENERAL);
+            console.log("fallooo 1", error);
         }
     }
 
@@ -91,13 +91,15 @@ class ProductRepository {
             const products = await ProductModel.findById(id);
 
             if (!products) {
-                throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
+                //throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
+                console.log("fallooo 2");
             }
 
             console.log("Producto encontrado!!");
             return products;
         } catch (error) {
-            throw new Error(EErrors.ERROR_GENERAL);
+            //throw new Error(EErrors.ERROR_GENERAL);
+            console.log("fallooo 3", error);
         }
     }
 
@@ -105,14 +107,16 @@ class ProductRepository {
         try {
             const actualizado = await ProductModel.findByIdAndUpdate(id, productoActualizado);
             if (!actualizado) {
-                throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
+                //throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
                 //return null;
+                console.log("fallooo 4");
             }
 
             console.log("Producto actualizado con exito");
             return actualizado;
         } catch (error) {
-            throw new Error(EErrors.ERROR_GENERAL);
+            //throw new Error(EErrors.ERROR_GENERAL);
+            console.log("fallooo 5", error);
         }
     }
 
@@ -121,14 +125,16 @@ class ProductRepository {
             const deleteado = await ProductModel.findByIdAndDelete(id);
 
             if (!deleteado) {
-                throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
+                //throw new Error(EErrors.PRODUCTO_NO_ENCONTRADO);
                 //return null;
+                console.log("fallooo 6");
             }
 
             console.log("Producto eliminado correctamente!");
             return deleteado;
         } catch (error) {
-            throw new Error(EErrors.ERROR_GENERAL);
+            //throw new Error(EErrors.ERROR_GENERAL);
+            console.log("fallooo 7", error);
         }
     }
 }
